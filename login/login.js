@@ -10,7 +10,14 @@ firebase.initializeApp(config);
 
 var firestore = firebase.firestore();
 
-//const passField = document.getElementById("passField");
+const emailField = document.getElementById("emailField");
+emailField.addEventListener("keypress", function(event){
+    if(event.keyCode === 13){
+        attemptLogin();
+    } 
+});
+
+const passField = document.getElementById("passField");
 passField.addEventListener("keypress", function(event){
     if(event.keyCode === 13){
         attemptLogin();
@@ -54,11 +61,11 @@ addCafItemRegular.addEventListener("click", function(){
 
 function attemptLogin() {
     //GET USERNAME AND PASSWORD IN TEXT FIELD
-    var email = document.getElementById("emailField").value;
+    var email = emailField.value;
     const password = passField.value;
     
     if(email.length > 0 && password.length > 0){
-        if(!email.indexOf('@') > -1){
+        if(email.indexOf('@') == -1){
            email += "@stachs.com";
         }
         
